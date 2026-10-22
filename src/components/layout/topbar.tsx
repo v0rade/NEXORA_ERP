@@ -144,7 +144,7 @@ export function Topbar({
 
         <div className="h-6 w-px bg-slate-200 mx-1" />
 
-        {/* User Profile */}
+        {/* User Profile & Logout */}
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-semibold flex items-center justify-center text-xs shadow-xs">
             {currentUserName.charAt(0)}
@@ -153,6 +153,21 @@ export function Topbar({
             <span className="text-xs font-semibold text-slate-900 leading-tight">{currentUserName}</span>
             <span className="text-[10px] text-slate-500 leading-tight">{activeRoleObj.label}</span>
           </div>
+
+          <button
+            onClick={async () => {
+              try {
+                await fetch("/api/auth/logout", { method: "POST" })
+                window.location.href = "/login"
+              } catch {
+                window.location.href = "/login"
+              }
+            }}
+            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors ml-1"
+            title="Log Out"
+          >
+            <LogOut className="w-4 h-4" />
+          </button>
         </div>
       </div>
     </header>
